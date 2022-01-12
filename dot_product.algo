@@ -1,0 +1,42 @@
+ALGORITHM algorithm_name
+VAR
+    VECTORS : STRUCT
+        V1 : ARRAY_OF INTEGER[];
+        V2 : ARRAY_OF INTEGER[];
+    END_STRUCT
+    ps : INTEGER;
+    vctrs : VECTORS[4];
+BEGIN
+    PROCEDURE dot_product(VAR v1 : ARRAY_OF INTEGER ,VAR v2 : ARRAY_OF INTEGER)
+    VAR
+    BEGIN
+        FOR i FROM 0 TO length(v1) STEP 1  DO
+            ps +:= v1[i] * v2[i];
+        END_FOR
+    END
+
+    FUNCTION dot_product(v1 : ARRAY_OF INTEGER ,v2 : ARRAY_OF INTEGER) : INTEGER
+    VAR
+    BEGIN
+        FOR i FROM 0 TO length(v1) STEP 1  DO
+            ps +:= v1[i] * v2[i];
+        END_FOR
+        RETURN ps ;
+    END
+
+    vctrs[0].v1 := 2;
+    vctrs[0].v2 := 4;
+    ...
+    vctrs[3].v1 := 1;
+    vctrs[3].v2 := 8;
+
+    FOR i FROM 0 TO length(vctrs) STEP 1  DO
+        FOR j FROM 0 TO length(vctrs[0].v1) STEP 1  DO
+            dot_product(vctrs[i].v1,vctrs[i].v2)
+            IF (ps == 0) THEN
+                write(vctrs[i].v1 + "and" + vctrs[i].v2 + "are orthogonals");
+            END_IF
+        END_FOR
+    END_FOR
+
+END
